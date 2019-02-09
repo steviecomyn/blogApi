@@ -2,11 +2,6 @@
 DROP DATABASE IF EXISTS richInternetApp;
 CREATE DATABASE richInternetApp;
 
-/*
-CREATE USER 'riaAdmin'@'localhost' IDENTIFIED BY 'palesand54';
-GRANT ALL PRIVILEGES ON richInternetApp.* TO 'riaAdmin'@'localhost';
- */
-
 USE richInternetApp;
 
 /* Create Tables */
