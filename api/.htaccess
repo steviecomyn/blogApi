@@ -1,0 +1,5 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^posts/?$ articles.php
+    RewriteRule ^posts/([0-9]+)/?$ articles.php?id=$1
+</IfModule>
