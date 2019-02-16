@@ -20,13 +20,12 @@ require('config/connection.php');
 <form action="">
 
     Post Title:<br>
-    <input type="text" value="Post Title">
+    <input type="text" name="postTitle">
     <br><br>
     Body Text:<br>
-    <textarea name="bodyText" cols="50" rows="10">This is Example Text.</textarea>
+    <textarea name="bodyText" cols="50" rows="10"></textarea>
     <br><br>
     <input type="submit" value="Submit">
-
 </form>
 
 <br><hr>
