@@ -94,4 +94,24 @@ function oneArticleJSON($id){
     echo json_encode($array);
 }
 
+function db_insertArticle($title, $coverimage, $bodytext, $publishdate, $email, $category){
+
+    // Connect to Database.
+    $connection = db_connect();
+
+    // Sanitise Form Results.
+    $cleanTitle = mysqli_real_escape_string($connection, ucfirst($title));
+    $cleanBodyText = mysqli_real_escape_string($connection, ucfirst($bodytext));
+
+    // prepare and bind
+    $stmt = $connection->prepare("INSERT INTO articles (title, bodyText, coverImage, publishDate, email, category) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $cleanTitle, $cleanBodyText, $coverimage, $publishdate, $email, $category);
+
+    if ($stmt->execute()) { 
+        return true;
+     } else {
+        return false;
+     }
+}
+
 ?>
