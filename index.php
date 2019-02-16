@@ -9,6 +9,13 @@ require('config/connection.php');
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>JSON API Backend</title>
+    <style>
+    body {
+        background-color: #f5f5f5;
+        color: #111;
+        font-family: 'Arial', 'Helvetica', sans-serif;
+    }
+    </style>
 </head>
 <body>
 
@@ -33,31 +40,28 @@ require('config/connection.php');
 
 <h2>View a Blog Post</h2>
 
-<ul>
-    <li><a href="">Week 1</a></li>
-    <li><a href="">Week 2</a></li>
-    <li><a href="">Week 3</a></li>
-    <li><a href="">Week 4</a></li>
-    <li><a href="">Week 5</a></li>
-</ul>
+<ul id="navigation"></ul>
 
 <p>Content Div</p>
-<div class="content" style="border: 1px solid #000; padding: 1em; width: 60%;">
+<div class="content" style="border: 1px solid #000; padding: 1em; width: 60%; background: #fff;">
 </div>
 
 <script>
 
     $(function(){
 
-        var $content = $('.content');
+        // caches the DOM element to Update.
+        var $content = $('#navigation');
 
         $.ajax({
             type: 'GET',
             dataType: "json",
             url: '/blogApi/api/posts/',
             success: function(posts){
+
+                // if successful, go through each item in the array(JSON), and output a list-item and link for each article.
                 $.each(posts, function(i, item) {
-                    $content.append('<span>'+ item.articleId + ' - ' + item.title +'</span><br>');
+                    $content.append('<li><a href="/blogApi/api/posts/'+ item.articleId +'">'+ item.title +'</a></li>');
                 });
             }
         });
