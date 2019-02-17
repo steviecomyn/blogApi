@@ -59,7 +59,7 @@ function db_select($query) {
 }
 
 // Takes the sql query, pulls data from the db returns it in JSON form.
-function allArticlesJSON(){
+function db_retrieveAllArticles(){
 
     // SQL Statement.
     $sql = "SELECT * FROM articles";
@@ -77,7 +77,7 @@ function allArticlesJSON(){
 }
 
 // Takes 1 article Id and returns that article row in JSON Form.
-function oneArticleJSON($id){
+function db_retrieveArticle($id){
 
     // SQL Statement.
     $sql = "SELECT * FROM articles WHERE articleid='$id'";
@@ -94,7 +94,7 @@ function oneArticleJSON($id){
     echo json_encode($array);
 }
 
-function db_insertArticle($title, $coverimage, $bodytext, $publishdate, $email, $category){
+function db_createArticle($title, $coverimage, $bodytext, $publishdate, $email, $category){
 
     // Connect to Database.
     $connection = db_connect();

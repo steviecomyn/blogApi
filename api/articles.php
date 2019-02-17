@@ -14,11 +14,11 @@ switch($request_method){
 		if(!empty($_GET["id"])){
 
 			$id=intval($_GET["id"]);
-			oneArticleJSON($id);
+			db_retrieveArticle($id);
 
 		} else {
 			// Show all Articles.
-			allArticlesJSON();
+			db_retrieveAllArticles();
 		}
 		break;
 
