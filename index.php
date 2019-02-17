@@ -15,6 +15,9 @@ require('config/connection.php');
         color: #111;
         font-family: 'Arial', 'Helvetica', sans-serif;
     }
+    hr {
+        border: 1px solid #BBB;
+    }
     </style>
 </head>
 <body>
@@ -61,7 +64,7 @@ require('config/connection.php');
 
                 // if successful, go through each item in the array(JSON), and output a list-item and link for each article.
                 $.each(posts, function(i, item) {
-                    $content.append('<li><a href="/blogApi/api/posts/'+ item.articleId +'">'+ item.title +'</a></li>');
+                    $content.append('<li><a href="#" id="week'+ item.articleId +'">'+ item.title +'</a></li>');
                 });
             }
         });
