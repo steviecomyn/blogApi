@@ -24,10 +24,13 @@ switch($request_method){
 
 	case 'POST':
 
-		if(!empty($_POST['something'])){
+		//Get JSON object.
+		//$postData = file_get_contents('php://input');
+		//var_dump($postData);
 
-			//Do something.
-		}
+		//Pass JSON to create Article function for processing.
+		db_createArticle($_POST);
+
 		break;
 
 	default:

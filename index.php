@@ -28,15 +28,17 @@ require('config/connection.php');
 
 <h2>Insert a Blog Post</h2>
 
-<form action="">
+<form id="createArticleForm" action="">
 
     Post Title:<br>
-    <input type="text" name="postTitle">
+    <input type="text" id="postTitle">
     <br><br>
     Body Text:<br>
-    <textarea name="bodyText" cols="50" rows="10"></textarea>
+    <textarea id="bodyText" cols="50" rows="10"></textarea>
     <br><br>
-    <input type="submit" value="Submit">
+    <input type="hidden" id="publishDate" value="<?php echo date("Y-m-d"); ?>">
+    <input type="hidden" id="coverImage" value="<?php echo 'Week10.jpg'; ?>">
+    <button id="submitNewArticle">Submit</button>
 </form>
 
 <br><hr>

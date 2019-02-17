@@ -73,6 +73,7 @@ function db_retrieveAllArticles(){
     }
 
     // outputs the JSON.
+    header('Content-type: text/json');
     echo json_encode($array);
 }
 
@@ -91,26 +92,41 @@ function db_retrieveArticle($id){
     }
 
     // outputs the JSON.
+    header('Content-type: text/json');
     echo json_encode($array);
 }
 
-function db_createArticle($title, $coverimage, $bodytext, $publishdate, $email, $category){
+function db_createArticle($json){
+
+    //Decode JSON into PHP Array.
+    //$array = json_decode($json, true);
+    $array = $json;
 
     // Connect to Database.
     $connection = db_connect();
+
+    //Seperate variables from array.
+    $title = $array['title'];
+    $bodyText = $array['bodyText'];
+    $coverImage = $array['coverImage'];
+    $publishDate = $array['publishDate'];
 
     // Sanitise Form Results.
     $cleanTitle = mysqli_real_escape_string($connection, ucfirst($title));
     $cleanBodyText = mysqli_real_escape_string($connection, ucfirst($bodytext));
 
     // prepare and bind
-    $stmt = $connection->prepare("INSERT INTO articles (title, bodyText, coverImage, publishDate, email, category) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $cleanTitle, $cleanBodyText, $coverimage, $publishdate, $email, $category);
+    $stmt = $connection->prepare("INSERT INTO articles (title, bodyText, coverImage, publishDate) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $cleanTitle, $cleanBodyText, $coverImage, $publishDate);
 
-    if ($stmt->execute()) { 
-        return true;
+    if ($stmt->execute()) {
+        // If Sucessful, Return JSON Response.
+        header('Content-type: text/json');
+        echo json_encode($array);
+
      } else {
-        return false;
+        var_dump($array);
+        echo "Error - Creating an Article Failed.";
      }
 }
 
