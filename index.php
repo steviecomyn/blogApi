@@ -15,16 +15,87 @@ require('config/connection.php');
         background-color: #f5f5f5;
         color: #111;
         font-family: 'Arial', 'Helvetica', sans-serif;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    a:visited {
+        color:blue;
     }
     hr {
         border: 1px solid #BBB;
+    }
+
+    header {
+        display: grid;
+        grid-template-columns: 110px auto;
+    }
+
+    .icon img {
+        margin: 10px auto;
+    }
+
+    h1 {
+        line-height: 1.2em;
+    }
+
+    .content {
+        border: 1px solid #ccc;
+        background: #fff;
+        padding: 1em;
+        margin: 0.5em 0;
+        max-width: 400px;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    li {
+        padding: 0.2em;
+    }
+
+    textarea,input {
+        border-radius: 0;
+        min-width: 400px;
+        padding: 1em;
+        margin: 0.5em 0;
+        border: 1px solid #ccc;
+        resize: none;
+    }
+
+    button {
+        background-color: #2196F3;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1em;
+        text-transform: uppercase;
+        padding: 0.6em 1em;
+        border: 0;
+        border-radius: 0.2em;
+        transition: linear 0.1s;
+    }
+
+    button:hover {
+        background-color: #39a1f4;
+    }
+
+    button:active {
+        background-color: #0c7cd6;
     }
     </style>
 </head>
 <body>
 
-<h1>JSON API - Backend Version. 1</h1>
-<p>This project has been created to act as an API for my Blog by serving Database entries via GET Methods in JSON format.</p>
+<header>
+<div class="icon">
+    <img src="icon.png" alt="API">
+</div>
+<div class="title">
+    <h1>JSON API - Backend Test Area</h1>
+    <p>This project has been created to act as an API for my Blog by serving Database entries via GET Methods in JSON format.</p>
+</div>
+</header>
 <hr>
 
 <h2>Insert a Blog Post</h2>
@@ -32,13 +103,12 @@ require('config/connection.php');
 <form id="createArticleForm" action="">
 
     Post Title:<br>
-    <input type="text" id="postTitle">
-    <br><br>
+    <input type="text" id="postTitle"><br>
     Body Text:<br>
     <textarea id="bodyText" cols="50" rows="10"></textarea>
     <br><br>
     <input type="hidden" id="publishDate" value="<?php echo date("Y-m-d"); ?>">
-    <input type="hidden" id="coverImage" value="<?php echo 'Week10.jpg'; ?>">
+    <input type="hidden" id="coverImage" value="<?php echo 'Image.jpg'; ?>">
     <button id="submitNewArticle">Submit</button>
 </form>
 
@@ -48,8 +118,8 @@ require('config/connection.php');
 
 <ul id="navigation"></ul>
 
-<p>Content Div</p>
-<div class="content" style="border: 1px solid #000; padding: 1em; width: 60%; background: #fff;">
+<h4>Content Div</h4>
+<div class="content">
 </div>
 
 <script src="js/jqueryFunctions.js"></script>
