@@ -49,30 +49,7 @@ require('config/connection.php');
 <div class="content" style="border: 1px solid #000; padding: 1em; width: 60%; background: #fff;">
 </div>
 
-<script>
-
-    $(function(){
-
-        // caches the DOM element to Update.
-        var $content = $('#navigation');
-
-        $.ajax({
-            type: 'GET',
-            dataType: "json",
-            url: '/blogApi/api/posts/',
-            success: function(posts){
-
-                // if successful, go through each item in the array(JSON), and output a list-item and link for each article.
-                $.each(posts, function(i, item) {
-                    $content.append('<li><a href="#" id="week'+ item.articleId +'">'+ item.title +'</a></li>');
-                });
-            }
-        });
-    });
-
-
-
-</script>
+<script src="js/jqueryFunctions.js"></script>
 
 <br><hr>
 <p>Stevie Comyn &copy; 2019</p>
