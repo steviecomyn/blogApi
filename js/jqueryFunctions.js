@@ -12,10 +12,24 @@ $(function(){
     // Pulls Article list from API and creates NavMenu.
     updateNavigation();
 
-    // Listener for Navigiation.
-    // $('#week1navLink').on('click', function()}{
-    //     loadArticle(1);
-    // });
+    // Listener for Navigiation Clicks.
+    $('#nav1').on('click', function(event){
+        // Prevent Normal link Behaviour.
+        event.preventDefault();
+
+        // Make GET Call to API.s
+        loadArticle(1);
+        
+    });
+
+    $('#nav2').on('click', function(event){
+        // Prevent Normal link Behaviour.
+        event.preventDefault();
+
+        // Make GET Call to API.s
+        loadArticle(2);
+        
+    });
 
 
     // Listener for form Submittion Button.
@@ -31,6 +45,7 @@ $(function(){
     });
 
 });
+
 
 // Creates and article based on form input values, and passes it to the API via POST.
 function addArticle(){
@@ -59,11 +74,20 @@ function loadArticle($id){
 
     $.ajax({
         type: 'GET',
-        dataType: 'json',
-        url: '/blogApi/api/posts/'+'?id='+$id,
-        success: function(article){
-            $content.append('<p>' + article.bodyText + '</p>');
-        }
+        data: {
+            id: $id
+        },
+        url: '/blogApi/api/posts/',
+        success: function(response){
+
+            // if successful, go through each item in the array(JSON), and output a list-item and link for each article.
+            $.each(response, function(i, article) {
+                $('.content').html(article.bodyText);
+            });
+        },
+        error: function(something) {
+            alert("it failed");
+          }
     });
 }
 
@@ -87,6 +111,6 @@ function updateNavigation(){
 
 // creates a link based on a JSON object.
 function addArticleLink(article){
-    $navMenu.append('<li><a href="#" id="week' + article.articleId + 'navLink">' + article.title + '</a></li>');        
+    $navMenu.append('<li><a href="" id="nav' + article.articleId + '">' + article.title + '</a></li>');        
 }
 
