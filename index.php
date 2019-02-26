@@ -120,6 +120,7 @@ require('config/connection.php');
 
 <h4>Content Div</h4>
 <div class="content">
+Content will load here.
 </div>
 
 <script src="js/jqueryFunctions.js"></script>
