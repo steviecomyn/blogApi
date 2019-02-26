@@ -116,6 +116,10 @@ require('config/connection.php');
 
 <h2>View a Blog Post</h2>
 
+<a href="" id="nav1">Week 1</a>
+
+<a href="" id="nav2">Week 2</a>
+
 <ul id="navigation"></ul>
 
 <h4>Content Div</h4>
