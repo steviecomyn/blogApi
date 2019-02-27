@@ -111,13 +111,9 @@ function db_createArticle($json){
     $coverImage = $array['coverImage'];
     $publishDate = $array['publishDate'];
 
-    // Sanitise Form Results.
-    $cleanTitle = mysqli_real_escape_string($connection, ucfirst($title));
-    $cleanBodyText = mysqli_real_escape_string($connection, ucfirst($bodytext));
-
     // prepare and bind
     $stmt = $connection->prepare("INSERT INTO articles (title, bodyText, coverImage, publishDate) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $cleanTitle, $cleanBodyText, $coverImage, $publishDate);
+    $stmt->bind_param("ssss", $title, $bodyText, $coverImage, $publishDate);
 
     if ($stmt->execute()) {
         // If Sucessful, Return JSON Response.
