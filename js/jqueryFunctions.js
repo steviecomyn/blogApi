@@ -125,7 +125,7 @@ function addArticle(){
     });
 }
 
-// Retreives a selected article.nav1 n
+// Retreives a selected article.
 function loadArticle($id){
 
     $.ajax({
