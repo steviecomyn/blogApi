@@ -32,8 +32,6 @@ switch($request_method){
 			// Invalid Request Method
 			header("HTTP/1.0 405 Method Not Allowed");
 		}
-		
-
 		break;
 
 	default:
