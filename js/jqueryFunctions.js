@@ -12,23 +12,79 @@ $(function(){
     // Pulls Article list from API and creates NavMenu.
     updateNavigation();
 
-    // Listener for Navigiation Clicks.
-    $('#nav1').on('click', function(event){
-        // Prevent Normal link Behaviour.
-        event.preventDefault();
-
-        // Make GET Call to API.s
-        loadArticle(1);
+    // Delay's the Listeners to allow the navigation links to load.
+    $(this).delay(100).queue(function() {
         
-    });
+        // Listeners for Navigiation Clicks.
+        $('#nav1').on('click', function(event){
+            // Prevent Normal link Behaviour.
+            event.preventDefault();
+            // Make GET Call to API.s
+            loadArticle(1);
+        });
 
-    $('#nav2').on('click', function(event){
-        // Prevent Normal link Behaviour.
-        event.preventDefault();
+        $('#nav2').on('click', function(event){
+            // Prevent Normal link Behaviour.
+            event.preventDefault();
+            // Make GET Call to API.s
+            loadArticle(2);
+        });
 
-        // Make GET Call to API.s
-        loadArticle(2);
-        
+        $('#nav3').on('click', function(event){
+            // Prevent Normal link Behaviour.
+            event.preventDefault();
+            // Make GET Call to API.s
+            loadArticle(3);
+        });
+
+        $('#nav4').on('click', function(event){
+            // Prevent Normal link Behaviour.
+            event.preventDefault();
+            // Make GET Call to API.s
+            loadArticle(4);
+        });
+
+        $('#nav5').on('click', function(event){
+            // Prevent Normal link Behaviour.
+            event.preventDefault();
+            // Make GET Call to API.s
+            loadArticle(5);
+        });
+
+        $('#nav6').on('click', function(event){
+            // Prevent Normal link Behaviour.
+            event.preventDefault();
+            // Make GET Call to API.s
+            loadArticle(6);
+        });
+
+        $('#nav7').on('click', function(event){
+            // Prevent Normal link Behaviour.
+            event.preventDefault();
+            // Make GET Call to API.s
+            loadArticle(7);
+        });
+
+        $('#nav8').on('click', function(event){
+            // Prevent Normal link Behaviour.
+            event.preventDefault();
+            // Make GET Call to API.s
+            loadArticle(8);
+        });
+
+        $('#nav9').on('click', function(event){
+            // Prevent Normal link Behaviour.
+            event.preventDefault();
+            // Make GET Call to API.s
+            loadArticle(9);
+        });
+
+        $('#nav10').on('click', function(event){
+            // Prevent Normal link Behaviour.
+            event.preventDefault();
+            // Make GET Call to API.s
+            loadArticle(10);
+        });
     });
 
 
@@ -69,7 +125,7 @@ function addArticle(){
     });
 }
 
-// Retreives a selected article.
+// Retreives a selected article.nav1 n
 function loadArticle($id){
 
     $.ajax({
@@ -111,6 +167,7 @@ function updateNavigation(){
 
 // creates a link based on a JSON object.
 function addArticleLink(article){
-    $navMenu.append('<li><a href="" id="nav' + article.articleId + '">' + article.title + '</a></li>');        
+   $navMenu.append('<li><a href="" id="nav' + article.articleId + '">' + article.title + '</a></li>');        
+    
 }
 
