@@ -12,95 +12,79 @@ $(function(){
     // Pulls Article list from API and creates NavMenu.
     updateNavigation();
 
+    // Hide's the modify form until needed.
+    $('#modifyForm').hide();
+
     // Delay's the Listeners to allow the navigation links to load.
     $(this).delay(100).queue(function() {
         
         // Listeners for Navigiation Clicks.
-        $('#nav1').on('click', function(event){
+        $('.loadPost').on('click', function(event){
             // Prevent Normal link Behaviour.
             event.preventDefault();
-            // Make GET Call to API.s
-            loadArticle(1);
+
+            // Make GET Call to API.
+            loadArticle(this.id);
+
         });
 
-        $('#nav2').on('click', function(event){
-            // Prevent Normal link Behaviour.
-            event.preventDefault();
-            // Make GET Call to API.s
-            loadArticle(2);
+        // Listener for form Submittion Button.
+        $('#submitNewArticle').on('click', function(){
+
+            // Some basic error handing.
+            if($postTitleInput.val().length > 0 && $bodyTextInput.val().length > 0){
+                addArticle();
+            } else {
+                alert("Keep with the Program, USER.");
+            }
+            
         });
 
-        $('#nav3').on('click', function(event){
+        // Listener for form edit post link.
+        $('.editPost').on('click', function(event){
+
             // Prevent Normal link Behaviour.
             event.preventDefault();
-            // Make GET Call to API.s
-            loadArticle(3);
+
+            // Loads the form for editing Post.
+            $('#modifyForm').show();
+
+            // populates form with previous data.
+            editArticle(this.id);
+            
         });
 
-        $('#nav4').on('click', function(event){
-            // Prevent Normal link Behaviour.
-            event.preventDefault();
-            // Make GET Call to API.s
-            loadArticle(4);
-        });
+        $('#cancelEditArticle').on('click', function(){
 
-        $('#nav5').on('click', function(event){
-            // Prevent Normal link Behaviour.
-            event.preventDefault();
-            // Make GET Call to API.s
-            loadArticle(5);
-        });
-
-        $('#nav6').on('click', function(event){
-            // Prevent Normal link Behaviour.
-            event.preventDefault();
-            // Make GET Call to API.s
-            loadArticle(6);
-        });
-
-        $('#nav7').on('click', function(event){
-            // Prevent Normal link Behaviour.
-            event.preventDefault();
-            // Make GET Call to API.s
-            loadArticle(7);
-        });
-
-        $('#nav8').on('click', function(event){
-            // Prevent Normal link Behaviour.
-            event.preventDefault();
-            // Make GET Call to API.s
-            loadArticle(8);
-        });
-
-        $('#nav9').on('click', function(event){
-            // Prevent Normal link Behaviour.
-            event.preventDefault();
-            // Make GET Call to API.s
-            loadArticle(9);
-        });
-
-        $('#nav10').on('click', function(event){
-            // Prevent Normal link Behaviour.
-            event.preventDefault();
-            // Make GET Call to API.s
-            loadArticle(10);
+            $('#modifyForm').hide();
         });
     });
 
-
-    // Listener for form Submittion Button.
-    $('#submitNewArticle').on('click', function(){
-
-        // Some basic error handing.
-        if($postTitleInput.val().length > 0 && $bodyTextInput.val().length > 0){
-            addArticle();
-        } else {
-            alert("Keep with the Program, USER.");
-        }
-        
-    });
 
 });
+
+// Allows the user to edit an existing Post.
+function editArticle($id){
+    
+    $.ajax({
+        type: 'GET',
+        data: {
+            id: $id
+        },
+        url: '/blogApi/api/posts/',
+        success: function(response){
+
+            // if successful, go through each item in the array(JSON), and output a list-item and link for each article.
+            $.each(response, function(i, article) {
+                $('#editPostTitle').val(article.title);
+                $('#editBodyText').html(article.bodyText);
+            });
+        },
+        error: function(something) {
+            alert("it failed");
+          }
+    });
+}
 
 
 // Creates and article based on form input values, and passes it to the API via POST.
@@ -170,7 +154,7 @@ function updateNavigation(){
 
 // creates a link based on a JSON object.
 function addArticleLink(article){
-   $navMenu.append('<tr><td><a href="" id="nav' + article.articleId + '">' + article.title + '</a></td><td style="text-align: center;"><a href="" id="editpost' + article.articleId +'"><i class="fa fa-pencil" aria-hidden="true"></i></a></td><td style="text-align: center;"><a href="" id="deletepost' + article.articleId +'"><i class="fa fa-trash" aria-hidden="true"></i></a></td></tr>');        
+   $navMenu.append('<tr><td><a href="" class="loadPost" id="' + article.articleId + '">' + article.title + '</a></td><td style="text-align: center;"><a href="" class="editPost" id="' + article.articleId +'"><i class="fa fa-pencil" aria-hidden="true"></i></a></td><td style="text-align: center;"><a href="" class="deletePost" id="' + article.articleId +'"><i class="fa fa-trash" aria-hidden="true"></i></a></td></tr>');        
     
 }
 
