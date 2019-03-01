@@ -170,7 +170,7 @@ function updateNavigation(){
 
 // creates a link based on a JSON object.
 function addArticleLink(article){
-   $navMenu.append('<tr><td><a href="" id="nav' + article.articleId + '">' + article.title + '</a></td><td>Edit</td><td>Delete</td></tr>');        
+   $navMenu.append('<tr><td><a href="" id="nav' + article.articleId + '">' + article.title + '</a></td><td style="text-align: center;"><a href="" id="editpost' + article.articleId +'"><i class="fa fa-pencil" aria-hidden="true"></i></a></td><td style="text-align: center;"><a href="" id="deletepost' + article.articleId +'"><i class="fa fa-trash" aria-hidden="true"></i></a></td></tr>');        
     
 }
 
