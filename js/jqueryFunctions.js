@@ -74,7 +74,7 @@ $(function(){
 
             // Some basic error handing.
             if($('#editTitle').val().length > 0 && $('#editBodyText').val().length > 0){
-                var newTitle = $('editTitle').html();
+                var newTitle = $('#editTitle').val();
                 var newBodyText = $('#editBodyText').val();
 
                 alert(newTitle +" && "+ newBodyText);
