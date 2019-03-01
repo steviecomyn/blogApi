@@ -41,9 +41,12 @@ h1 {
 
 #navigation thead {
     background-color: #bbb;
+    background-color: #2196F3;
     font-weight: bold;
     color: #fff;
 }
+
+tr:nth-child(even){background-color: #fafafa;}
 
 #navigation td {
     padding: 0.6rem;
