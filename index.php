@@ -9,81 +9,9 @@ require('config/connection.php');
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
     <title>JSON API Backend</title>
-    <style>
-    body {
-        background-color: #f5f5f5;
-        color: #111;
-        font-family: 'Arial', 'Helvetica', sans-serif;
-        width: 90%;
-        margin: 0 auto;
-    }
-
-    a:visited {
-        color:blue;
-    }
-    hr {
-        border: 1px solid #BBB;
-    }
-
-    header {
-        display: grid;
-        grid-template-columns: 110px auto;
-    }
-
-    .icon img {
-        margin: 10px auto;
-    }
-
-    h1 {
-        line-height: 1.2em;
-    }
-
-    .content {
-        border: 1px solid #ccc;
-        background: #fff;
-        padding: 1em;
-        margin: 0.5em 0;
-        max-width: 400px;
-    }
-
-    ul {
-        list-style: none;
-    }
-
-    li {
-        padding: 0.2em;
-    }
-
-    textarea,input {
-        border-radius: 0;
-        min-width: 400px;
-        padding: 1em;
-        margin: 0.5em 0;
-        border: 1px solid #ccc;
-        resize: none;
-    }
-
-    button {
-        background-color: #2196F3;
-        color: #fff;
-        font-weight: bold;
-        font-size: 1em;
-        text-transform: uppercase;
-        padding: 0.6em 1em;
-        border: 0;
-        border-radius: 0.2em;
-        transition: linear 0.1s;
-    }
-
-    button:hover {
-        background-color: #39a1f4;
-    }
-
-    button:active {
-        background-color: #0c7cd6;
-    }
-    </style>
 </head>
 <body>
 
@@ -116,7 +44,13 @@ require('config/connection.php');
 
 <h2>View a Blog Post</h2>
 
-<ul id="navigation"></ul>
+<table id="navigation">
+<thead><tr>
+    <td>Blog Post</td>
+    <td>Edit</td>
+    <td>Delete</td>
+</tr></thead>
+</table>
 
 <h4>Content Div</h4>
 <div class="content">
