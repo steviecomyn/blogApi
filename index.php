@@ -58,7 +58,7 @@ require('config/connection.php');
     <form id="modifyArticleForm" action="">
 
         Post Title:<br>
-        <input type="text" id="editPostTitle"><br>
+        <input type="text" id="editTitle"><br>
         Body Text:<br>
         <textarea id="editBodyText" cols="50" rows="10"></textarea>
         <br><br>
