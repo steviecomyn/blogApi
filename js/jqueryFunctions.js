@@ -121,6 +121,9 @@ function addArticle(){
         data: article,
         success: function(newArticle){
             addArticleLink(newArticle)
+        },
+        error: function(something){
+            alert("It Failed.");
         }
     });
 }
