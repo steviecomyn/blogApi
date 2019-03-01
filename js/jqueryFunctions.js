@@ -28,7 +28,7 @@ $(function(){
 
         });
 
-        // Listener for form Submittion Button.
+        // Listener for add post form Submittion Button.
         $('#submitNewArticle').on('click', function(){
 
             // Some basic error handing.
@@ -37,6 +37,7 @@ $(function(){
             } else {
                 alert("Keep with the Program, USER.");
             }
+            
             
         });
 
@@ -51,6 +52,35 @@ $(function(){
 
             // populates form with previous data.
             editArticle(this.id);
+            
+        });
+
+        // Listener for form edit post link.
+        $('.deletePost').on('click', function(event){
+
+            // Prevent Normal link Behaviour.
+            event.preventDefault();
+
+            if (confirm('Are you sure you want to Delete this Post?')) {
+                alert('Post Deleted.');
+            } else {
+                alert('So... you just wanted to see what would happen?');
+            }
+            
+        });
+
+        // Listener for add post form Submittion Button.
+        $('#submitEditedArticle').on('click', function(){
+
+            // Some basic error handing.
+            if($('#editTitle').val().length > 0 && $('#editBodyText').val().length > 0){
+                var newTitle = $('editTitle').html();
+                var newBodyText = $('#editBodyText').val();
+
+                alert(newTitle +" && "+ newBodyText);
+            } else {
+                alert("Keep with the Program, USER.");
+            }
             
         });
 
@@ -76,7 +106,7 @@ function editArticle($id){
 
             // if successful, go through each item in the array(JSON), and output a list-item and link for each article.
             $.each(response, function(i, article) {
-                $('#editPostTitle').val(article.title);
+                $('#editTitle').val(article.title);
                 $('#editBodyText').html(article.bodyText);
             });
         },
