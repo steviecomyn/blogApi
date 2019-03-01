@@ -46,9 +46,9 @@ require('config/connection.php');
 
 <table id="navigation">
 <thead><tr>
-    <td>Blog Post</td>
-    <td>Edit</td>
-    <td>Delete</td>
+    <td>Title</td>
+    <td style="text-align: center;">Edit Post</td>
+    <td style="text-align: center;">Delete Post</td>
 </tr></thead>
 </table>
 
