@@ -47,14 +47,31 @@ require('config/connection.php');
 <table id="navigation">
 <thead><tr>
     <td>Title</td>
-    <td style="text-align: center;">Edit Post</td>
-    <td style="text-align: center;">Delete Post</td>
+    <td style="text-align: center;">Edit</td>
+    <td style="text-align: center;">Delete</td>
 </tr></thead>
 </table>
 
-<h4>Content Div</h4>
-<div class="content">
-Content will load here.
+<div id="modifyForm">
+    <h2>Modify a Blog Post</h2>
+
+    <form id="modifyArticleForm" action="">
+
+        Post Title:<br>
+        <input type="text" id="editPostTitle"><br>
+        Body Text:<br>
+        <textarea id="editBodyText" cols="50" rows="10"></textarea>
+        <br><br>
+        <button id="submitEditedArticle">UPDATE</button>
+        <button id="cancelEditArticle">cancel</button>
+    </form>
+</div>
+
+<div id="contentDiv">
+    <h4>Content Div</h4>
+    <div class="content">
+    Content will load here.
+    </div>
 </div>
 
 <script src="js/jqueryFunctions.js"></script>
