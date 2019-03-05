@@ -126,4 +126,40 @@ function db_createArticle($json){
      }
 }
 
+
+function db_updateArticle($json){
+
+    //Decode JSON into PHP Array.
+    //$array = json_decode($json, true);
+    $array = $json;
+
+    // Connect to Database.
+    $connection = db_connect();
+
+    //Seperate variables from array.
+    $title = $array['title'];
+    $bodyText = $array['bodyText'];
+    $coverImage = $array['coverImage'];
+    $publishDate = $array['publishDate'];
+
+    // prepare and bind
+    $stmt = $connection->prepare("UPDATE articles SET title = ?, bodyText = ?, coverImage = ?, publishDate = ? WHERE id = ?");
+    $stmt->bind_param("ssss", $title, $bodyText, $coverImage, $publishDate);
+
+    if ($stmt->execute()) {
+        // If Sucessful, Return JSON Response.
+        header('Content-type: text/json');
+        echo json_encode($array);
+
+     } else {
+        var_dump($array);
+        echo "Error - Creating an Article Failed.";
+     }
+}
+
+function db_deleteArticle($json){
+
+    
+}
+
 ?>
