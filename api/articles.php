@@ -34,6 +34,17 @@ switch($request_method){
 		}
 		break;
 
+	case 'DELETE':
+
+		// Delete Artile by Id.
+		if(!empty($_DELETE["id"])){
+
+			$id=intval($_DELETE["id"]);
+			db_deleteArticle($id);
+
+		}
+		break;
+
 	default:
 		// Invalid Request Method
 		header("HTTP/1.0 405 Method Not Allowed");
