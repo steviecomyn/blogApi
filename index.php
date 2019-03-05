@@ -14,7 +14,6 @@ require('config/connection.php');
     <title>JSON API Backend</title>
 </head>
 <body>
-
 <header>
 <div class="icon">
     <img src="icon.png" alt="API">
@@ -26,23 +25,23 @@ require('config/connection.php');
 </header>
 <hr>
 
-<h2>Insert a Blog Post</h2>
+<h2>Create a Blog Post</h2>
 
 <form id="createArticleForm" action="">
 
     Post Title:<br>
     <input type="text" id="postTitle"><br>
     Body Text:<br>
-    <textarea id="bodyText" cols="50" rows="10"></textarea>
-    <br><br>
-    <input type="hidden" id="publishDate" value="<?php echo date("Y-m-d"); ?>">
+    <textarea id="bodyText" cols="50" rows="10"></textarea><br>
+    Publish Date:<br>
+    <input type="text" id="publishDate" value="<?php echo date("Y-m-d"); ?>" disabled><br><br>
     <input type="hidden" id="coverImage" value="<?php echo 'Image.jpg'; ?>">
-    <button id="submitNewArticle">Submit</button>
+    <button id="submitNewArticle">CREATE</button>
 </form>
 
 <br><hr>
 
-<h2>View a Blog Post</h2>
+<h2>Retrieve a Blog Post</h2>
 
 <table id="navigation">
 <thead><tr>
@@ -53,10 +52,11 @@ require('config/connection.php');
 </table>
 
 <div id="modifyForm">
-    <h2>Modify a Blog Post</h2>
+    <h2>Update a Blog Post</h2>
 
     <form id="modifyArticleForm" action="">
-
+        Post id:<br>
+        <input type="text" id="editId" disabled><br>
         Post Title:<br>
         <input type="text" id="editTitle"><br>
         Body Text:<br>
