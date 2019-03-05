@@ -6,6 +6,7 @@ var $coverImageInput = $('#coverImage');
 var $publishDateInput = $('#publishDate');
 var $content = $('.content');
 
+
 // On Page Load, do this.
 $(function(){
 
@@ -23,9 +24,8 @@ $(function(){
             // Prevent Normal link Behaviour.
             event.preventDefault();
 
-            // Make GET Call to API.
+            // Make GET Call to API with the post id taken from the links id.
             loadArticle(this.id);
-
         });
 
         // Listener for add post form Submittion Button.
@@ -35,10 +35,8 @@ $(function(){
             if($postTitleInput.val().length > 0 && $bodyTextInput.val().length > 0){
                 addArticle();
             } else {
-                alert("Keep with the Program, USER.");
+                alert("STOP HUMAN - You're supposed to write something.");
             }
-            
-            
         });
 
         // Listener for form edit post link.
@@ -50,34 +48,38 @@ $(function(){
             // Loads the form for editing Post.
             $('#modifyForm').show();
 
-            // populates form with previous data.
-            editArticle(this.id);
+            // populates form with original data from API.
+            getArticletoUpdate(this.id);
             
         });
 
-        // Listener for form edit post link.
+        // Listener for delete post link.
         $('.deletePost').on('click', function(event){
 
             // Prevent Normal link Behaviour.
             event.preventDefault();
 
-            if (confirm('Are you sure you want to Delete this Post?')) {
-                alert('Post Deleted.');
+            if (confirm('Are you sure you want to delete this item from the database? This cannot be undone.')) {
+
+                // Send the Article id to the API with a DELETE HTTP Method.
+                deleteArticle(this.id);
+
             } else {
                 alert('So... you just wanted to see what would happen?');
             }
             
         });
 
-        // Listener for add post form Submittion Button.
+        // Listener for edit post form Submittion Button.
         $('#submitEditedArticle').on('click', function(){
 
             // Some basic error handing.
             if($('#editTitle').val().length > 0 && $('#editBodyText').val().length > 0){
-                var newTitle = $('#editTitle').val();
-                var newBodyText = $('#editBodyText').val();
 
-                alert(newTitle +" && "+ newBodyText);
+                $id = $('#editId').val();
+
+                editArticle($id);
+
             } else {
                 alert("Keep with the Program, USER.");
             }
@@ -93,8 +95,9 @@ $(function(){
 
 });
 
+
 // Allows the user to edit an existing Post.
-function editArticle($id){
+function getArticletoUpdate($id){
     
     $.ajax({
         type: 'GET',
@@ -106,12 +109,13 @@ function editArticle($id){
 
             // if successful, go through each item in the array(JSON), and output a list-item and link for each article.
             $.each(response, function(i, article) {
+                $('#editId').val(article.articleId);
                 $('#editTitle').val(article.title);
                 $('#editBodyText').html(article.bodyText);
             });
         },
         error: function(something) {
-            alert("it failed");
+            alert("it failed to Get the Article for Modification.");
           }
     });
 }
@@ -137,7 +141,7 @@ function addArticle(){
             addArticleLink(newArticle)
         },
         error: function(something){
-            alert("It Failed.");
+            alert("It Failed to Add the Article.");
         }
     });
 }
@@ -159,7 +163,25 @@ function loadArticle($id){
             });
         },
         error: function(something) {
-            alert("it failed");
+            alert("it failed to Get the Article.");
+          }
+    });
+}
+
+// Deletes a selected article.
+function deleteArticle($id){
+
+    $.ajax({
+        type: 'DELETE',
+        data: {
+            id: $id
+        },
+        url: '/blogApi/api/posts/',
+        success: function(response){
+            alert("Entry Deleted.");
+        },
+        error: function(something) {
+            alert("it failed to Delete the Article.");
           }
     });
 }
