@@ -19,29 +19,29 @@ require('config/connection.php');
     <img src="icon.png" alt="API">
 </div>
 <div class="title">
-    <h1>JSON API - Backend Test Area</h1>
+    <h1>JSON API - Backend Control Panel</h1>
     <p>This project has been created to act as an API for my Blog by serving Database entries via GET Methods in JSON format.</p>
 </div>
 </header>
 <hr>
 
-<h2>Create a Blog Post</h2>
+<h2>Create an Article</h2>
 
-<form id="createArticleForm" action="">
+<form class="createArticle" id="createArticleForm" action="">
 
     Post Title:<br>
-    <input type="text" id="postTitle"><br>
+    <input type="text" id="title"><br>
     Body Text:<br>
     <textarea id="bodyText" cols="50" rows="10"></textarea><br>
     Publish Date:<br>
-    <input type="text" id="publishDate" value="<?php echo date("Y-m-d"); ?>" disabled><br><br>
-    <input type="hidden" id="coverImage" value="<?php echo 'Image.jpg'; ?>">
-    <button id="submitNewArticle">CREATE</button>
+    <input type="text" id="publishDate" value="<?php echo date("Y-m-d"); ?>" disabled>
+    <br><br>
+    <button id="submit">Create</button>
 </form>
 
 <br><hr>
 
-<h2>Retrieve a Blog Post</h2>
+<h2>Retrieve an Article</h2>
 
 <table id="navigation">
 <thead><tr>
@@ -51,27 +51,29 @@ require('config/connection.php');
 </tr></thead>
 </table>
 
-<div id="modifyForm">
-    <h2>Update a Blog Post</h2>
-
-    <form id="modifyArticleForm" action="">
-        Post id:<br>
-        <input type="text" id="editId" disabled><br>
-        Post Title:<br>
-        <input type="text" id="editTitle"><br>
-        Body Text:<br>
-        <textarea id="editBodyText" cols="50" rows="10"></textarea>
-        <br><br>
-        <button id="submitEditedArticle">UPDATE</button>
-        <button id="cancelEditArticle">cancel</button>
-    </form>
-</div>
-
 <div id="contentDiv">
     <h4>Content Div</h4>
     <div class="content">
     Content will load here.
     </div>
+</div>
+
+<div id="updateArticleFormDiv">
+    <h2>Update an Article</h2>
+
+    <form class="updateArticle" id="updateArticleForm" action="">
+        Post id:<br>
+        <input type="text" id="id" disabled><br>
+        Post Title:<br>
+        <input type="text" id="title"><br>
+        Body Text:<br>
+        <textarea id="bodyText" cols="50" rows="10"></textarea><br>
+        Publish Date:<br>
+        <input type="text" id="publishDate" value="<?php echo date("Y-m-d"); ?>" disabled>
+        <br><br>
+        <button id="submit">Update</button>
+        <button id="cancel">Cancel</button>
+    </form>
 </div>
 
 <script src="js/jqueryFunctions.js"></script>
