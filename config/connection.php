@@ -112,8 +112,8 @@ function db_createArticle($json){
     $publishDate = $array['publishDate'];
 
     // prepare and bind
-    $stmt = $connection->prepare("INSERT INTO articles (title, bodyText, coverImage, publishDate) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $title, $bodyText, $coverImage, $publishDate);
+    $stmt = $connection->prepare("INSERT INTO articles (title, bodyText, publishDate) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $title, $bodyText, $publishDate);
 
     if ($stmt->execute()) {
         // If Sucessful, Return JSON Response.
@@ -130,35 +130,57 @@ function db_createArticle($json){
 function db_updateArticle($json){
 
     //Decode JSON into PHP Array.
-    //$array = json_decode($json, true);
     $array = $json;
 
     // Connect to Database.
     $connection = db_connect();
 
     //Seperate variables from array.
+    $id = $array['id'];
     $title = $array['title'];
     $bodyText = $array['bodyText'];
     $coverImage = $array['coverImage'];
     $publishDate = $array['publishDate'];
 
     // prepare and bind
-    $stmt = $connection->prepare("UPDATE articles SET title = ?, bodyText = ?, coverImage = ?, publishDate = ? WHERE id = ?");
-    $stmt->bind_param("ssss", $title, $bodyText, $coverImage, $publishDate);
+    $stmt = $connection->prepare("UPDATE articles SET title = ?, bodyText = ?, publishDate = ? WHERE articleId=?");
+    $stmt->bind_param("ssss", $title, $bodyText, $publishDate, $id);
 
     if ($stmt->execute()) {
         // If Sucessful, Return JSON Response.
         header('Content-type: text/json');
         echo json_encode($array);
 
-     } else {
-        var_dump($array);
-        echo "Error - Creating an Article Failed.";
-     }
+    } else {
+        //var_dump($array);
+        echo "Error - Updating an Article Failed.";
+    }
 }
 
 function db_deleteArticle($json){
 
+    //Decode JSON into PHP Array.
+    $array = $json;
+
+    // Connect to Database.
+    $connection = db_connect();
+
+    //Seperate variables from array.
+    $id = $array['id'];
+
+    // prepare and bind
+    $stmt = $connection->prepare("DELETE FROM articles WHERE articleId=?");
+    $stmt->bind_param("s", $id);
+
+    if ($stmt->execute()) {
+        // If Sucessful, Return JSON Response.
+        header('Content-type: text/json');
+        echo "Article " + $id + " has been Deleted Successfully.";
+
+    } else {
+        var_dump($array);
+        echo "Error - Updating an Article Failed.";
+    }
     
 }
 
