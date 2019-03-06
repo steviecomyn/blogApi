@@ -26,22 +26,33 @@ switch($request_method){
 	case 'POST':
 
 		if(!empty($_POST)){
-			//Pass JSON to create Article function for processing.
-			db_createArticle($_POST);
+
+			// Identifies what action is required.
+			$action = $_POST['action'];
+
+			// Filter's actions to the right function.
+			switch($action){
+
+				case 'createArticle':
+					//Pass JSON to create Article function for processing.
+					db_createArticle($_POST);
+					break;
+
+				case 'updateArticle':
+					//Pass JSON to update Article function for processing.
+					db_updateArticle($_POST);
+					break;
+
+				case 'deleteArticle':
+					//Pass JSON to delete Article function for deletion.
+					db_deleteArticle($_POST);
+				default:
+					echo("ARTICLES.PHP - Something failed with the Post");
+			}
+
 		} else {
 			// Invalid Request Method
 			header("HTTP/1.0 405 Method Not Allowed");
-		}
-		break;
-
-	case 'DELETE':
-
-		// Delete Artile by Id.
-		if(!empty($_DELETE["id"])){
-
-			$id=intval($_DELETE["id"]);
-			db_deleteArticle($id);
-
 		}
 		break;
 
