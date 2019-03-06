@@ -2,6 +2,7 @@
 var $navigationMenu = $('#navigation');
 var $contentArea = $('.content');
 var $updateArticleFormDiv = $('#updateArticleFormDiv');
+var $loadingSpinner = $('#loadingSpinner');
 
 // createArticleForm DOM Elements.
 var $createArticleTitle = $('.createArticle #title');
@@ -69,11 +70,9 @@ $(function(){
             }
             
         });
-        // Listener for updateArticleForm Cancel Button.
-        $updateArticleCancel.on('click', function(event){
 
-            // Prevent Normal link Behaviour.
-            event.preventDefault();
+        // Listener for updateArticleForm Cancel Button.
+        $updateArticleCancel.on('click', function(){
 
             // THIS IS BLOODY BROKEN AND I DON'T KNOW WHY!!!!!
             $updateArticleFormDiv.hide();
@@ -83,6 +82,8 @@ $(function(){
         // Listener for loading updateArticleForm link.
         $('.updateArticle').on('click', function(event){
 
+            $linkId = this.id;
+
             // Prevent Normal link Behaviour.
             event.preventDefault();
 
@@ -90,7 +91,7 @@ $(function(){
             $('#updateArticleFormDiv').show();
 
             // populates form with original data from API.
-            getArticletoUpdate(this.id);
+            getArticletoUpdate($linkId);
             
         });
 
@@ -100,7 +101,7 @@ $(function(){
             // Prevent Normal link Behaviour.
             event.preventDefault();
 
-            if (confirm('Are you sure you want to delete this Article from the database? This cannot be undone.')) {
+            if (confirm('Are you sure you want to delete this Article (#'+ this.id +') from the database? This cannot be undone.')) {
 
                 // Send the Article id to the API with a DELETE HTTP Method.
                 deleteArticle(this.id);
@@ -110,6 +111,7 @@ $(function(){
             }
             
         });
+
     });
 
 });
@@ -146,7 +148,7 @@ function createArticle(){
 
     // Create JSON Object.
     var article = {
-        action: 'CREATE',
+        action: 'createArticle',
         title: $createArticleTitle.val(),
         bodyText: $createArticleBodyText.val(),
         publishDate: $createArticlePublishDate.val()
@@ -203,7 +205,7 @@ function getArticletoUpdate($id){
             $.each(response, function(i, article) {
                 $updateArticleId.val(article.articleId);
                 $updateArticleTitle.val(article.title);
-                $updateArticleBodyText.html(article.bodyText);
+                $updateArticleBodyText.val(article.bodyText);
                 $updateArticlePublishDate.val(article.publishDate);
             });
         },
@@ -218,10 +220,10 @@ function updateArticle(){
 
     // Create JSON Object.
     var article = {
-        action: 'UPDATE',
+        action: 'updateArticle',
         id: $updateArticleId.val(),
         title: $updateArticleTitle.val(),
-        bodyText: $updateArticleBodyText.html(),
+        bodyText: $updateArticleBodyText.val(),
         publishDate: $updateArticlePublishDate.val()
     };
 
@@ -231,7 +233,14 @@ function updateArticle(){
         url: '/blogApi/api/posts/',
         data: article,
         success: function(updatedArticle){
-            alert(updatedArticle);
+            // Confirms Success.
+            alert("Article id:" + updatedArticle.id + " was Updated Successfully!");
+            // Hide's the updateArticleForm.
+            $updateArticleFormDiv.hide();
+            //Removes old links.
+            $('#navigation > tr').remove();
+            //Updates with new links.
+            updateNavigation();
         },
         error: function(something){
             alert("It Failed to Update the Article.");
@@ -245,12 +254,13 @@ function deleteArticle($id){
     $.ajax({
         type: 'POST',
         data: {
-            action: 'DELETE',
+            action: 'deleteArticle',
             id: $id
         },
         url: '/blogApi/api/posts/',
         success: function(response){
-            alert("Entry Deleted.");
+            alert(response);
+            $('.retrieveArticle#'+$id).remove();
         },
         error: function(something) {
             alert("it failed to Delete the Article.");
