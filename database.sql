@@ -18,7 +18,6 @@ CREATE TABLE articles (
     articleId INT(6) AUTO_INCREMENT,
     title VARCHAR(128) NOT NULL,
     bodyText VARCHAR(10000) NOT NULL,
-    coverImage VARCHAR(100),
     publishDate DATE NOT NULL,
     PRIMARY KEY (articleId)
 );
@@ -30,18 +29,16 @@ VALUES ('admin@comyn.pw','Admin', 'McAdminFace', 'admin');
 
 /* Add Articles */
 
-INSERT INTO articles (title, bodyText, coverImage, publishDate)
+INSERT INTO articles (title, bodyText, publishDate)
 VALUES (
 'Week 1 - Intro to Rich Internet Applications', 
 'lorem lol',
-'week1-cover.jpg',
 '2019-02-08'
 );
 
-INSERT INTO articles (title, bodyText, coverImage, publishDate)
+INSERT INTO articles (title, bodyText, publishDate)
 VALUES (
 'Week 2 - Somesort of Title', 
 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda explicabo culpa quasi repellat earum aut nam voluptas repudiandae labore ipsa. Nostrum, eveniet. Architecto laborum quo minima, excepturi aspernatur modi! Laboriosam.',
-'week2-cover.jpg',
 '2019-02-11'
 );
