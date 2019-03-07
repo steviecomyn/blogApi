@@ -13,6 +13,38 @@ hr {
     border: 1px solid #BBB;
 }
 
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.7);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#spinner {
+    display: inline-block;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    border: 4px solid rgba(200,200,200, 0.8);
+    border-top: 4px solid #0c7cd6;
+    -webkit-animation: spin 1.1s infinite linear;
+    animation: spin 1.1s infinite linear;
+}
+
+@keyframes spin{
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
 header {
     display: grid;
     grid-template-columns: 110px auto;
