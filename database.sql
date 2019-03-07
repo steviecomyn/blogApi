@@ -42,3 +42,31 @@ VALUES (
 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda explicabo culpa quasi repellat earum aut nam voluptas repudiandae labore ipsa. Nostrum, eveniet. Architecto laborum quo minima, excepturi aspernatur modi! Laboriosam.',
 '2019-02-11'
 );
+
+INSERT INTO articles (title, bodyText, publishDate)
+VALUES (
+'Week 3 - Somesort of Title', 
+'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda explicabo culpa quasi repellat earum aut nam voluptas repudiandae labore ipsa. Nostrum, eveniet. Architecto laborum quo minima, excepturi aspernatur modi! Laboriosam.',
+'2019-02-11'
+);
+
+INSERT INTO articles (title, bodyText, publishDate)
+VALUES (
+'Week 4 - Somesort of Title', 
+'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda explicabo culpa quasi repellat earum aut nam voluptas repudiandae labore ipsa. Nostrum, eveniet. Architecto laborum quo minima, excepturi aspernatur modi! Laboriosam.',
+'2019-02-11'
+);
+
+INSERT INTO articles (title, bodyText, publishDate)
+VALUES (
+'Week 5 - Somesort of Title', 
+'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda explicabo culpa quasi repellat earum aut nam voluptas repudiandae labore ipsa. Nostrum, eveniet. Architecto laborum quo minima, excepturi aspernatur modi! Laboriosam.',
+'2019-02-11'
+);
+
+INSERT INTO articles (title, bodyText, publishDate)
+VALUES (
+'Week 6 - Somesort of Title', 
+'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda explicabo culpa quasi repellat earum aut nam voluptas repudiandae labore ipsa. Nostrum, eveniet. Architecto laborum quo minima, excepturi aspernatur modi! Laboriosam.',
+'2019-02-11'
+);
