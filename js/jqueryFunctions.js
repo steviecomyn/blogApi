@@ -2,7 +2,7 @@
 var $navigationMenu = $('#navigation');
 var $contentArea = $('.content');
 var $updateArticleFormDiv = $('#updateArticleFormDiv');
-var $loadingSpinner = $('#loadingSpinner');
+var $loadingSpinner = $('#loader');
 
 // createArticleForm DOM Elements.
 var $createArticleTitle = $('.createArticle #title');
@@ -18,6 +18,20 @@ var $updateArticlePublishDate = $('.updateArticle #publishDate');
 var $updateArticleSubmit = $('.updateArticle #submit');
 var $updateArticleCancel = $('.updateArticle #cancel');
 
+// Hides the spinner by default.
+$loadingSpinner.hide();
+
+// Shows spinner if ajax call is made.
+$(document).ajaxStart(function(){
+    $loadingSpinner.show();
+});
+
+// Hide's the spinner when ajax call is complete.
+$(document).ajaxComplete(function(){
+    $loadingSpinner.hide();
+});
+
+
 // Document.ready (once page has loaded)
 $(function(){
 
@@ -28,7 +42,7 @@ $(function(){
     $updateArticleFormDiv.hide();
 
     // Delay's the Listeners to allow the navigation links to load.
-    $(this).delay(100).queue(function() {
+    $(this).delay(200).queue(function() {
 
         // Listener for createArticleForm Submit Button.
         $createArticleSubmit.on('click', function(event){
@@ -98,13 +112,15 @@ $(function(){
         // Listener for Deleting an Article.
         $('.deleteArticle').on('click', function(event){
 
+            $linkId = this.id;
+
             // Prevent Normal link Behaviour.
             event.preventDefault();
 
-            if (confirm('Are you sure you want to delete this Article (#'+ this.id +') from the database? This cannot be undone.')) {
+            if (confirm('Are you sure you want to delete this Article (#'+ $linkId +') from the database? This cannot be undone.')) {
 
                 // Send the Article id to the API with a DELETE HTTP Method.
-                deleteArticle(this.id);
+                deleteArticle($linkId);
 
             } else {
                 alert('So... you just wanted to see what would happen?');
@@ -138,7 +154,7 @@ function updateNavigation(){
 
 // creates a link based on a JSON object.
 function createArticleLink(article){
-    $navigationMenu.append('<tr><td><a href="" class="retrieveArticle" id="' + article.articleId + '">' + article.title + '</a></td><td style="text-align: center;"><a href="" class="updateArticle" id="' + article.articleId +'"><i class="fa fa-pencil" aria-hidden="true"></i></a></td><td style="text-align: center;"><a href="" class="deleteArticle" id="' + article.articleId +'"><i class="fa fa-trash" aria-hidden="true"></i></a></td></tr>');
+    $navigationMenu.append('<tr id="row' + article.articleId + '"><td><a href="" class="retrieveArticle" id="' + article.articleId + '">' + article.title + '</a></td><td style="text-align: center;"><a href="" class="updateArticle" id="' + article.articleId +'"><i class="fa fa-pencil" aria-hidden="true"></i></a></td><td style="text-align: center;"><a href="" class="deleteArticle" id="' + article.articleId +'"><i class="fa fa-trash" aria-hidden="true"></i></a></td></tr>');
 }
 
 // MAIN CRUD FUNCTIONS
@@ -159,13 +175,26 @@ function createArticle(){
         type: 'POST',
         url: '/blogApi/api/posts/',
         data: article,
+        beforeSend: function(){
+            $loadingSpinner.show();
+        },
         success: function(newArticle){
             createArticleLink(newArticle);
+        },
+        complete: function(){
+            $loadingSpinner.hide();
+            clearCreateArticleForm();
         },
         error: function(something){
             alert("It Failed to Add the Article.");
         }
     });
+}
+
+function clearCreateArticleForm(){
+
+    $createArticleTitle.val("");
+    $createArticleBodyText.val("");
 }
 
 // Retreives a selected article.
@@ -251,6 +280,9 @@ function updateArticle(){
 // Deletes a selected article.
 function deleteArticle($id){
 
+    // Identify the link for that Article Id.
+    $navLink = $navigationMenu.find("#row"+$id);
+
     $.ajax({
         type: 'POST',
         data: {
@@ -258,12 +290,18 @@ function deleteArticle($id){
             id: $id
         },
         url: '/blogApi/api/posts/',
+        beforeSend: function() {
+            // Visual Feedback of Deletion.
+            $navLink.find('a').animate({ color : '#fff'}, "fast");
+            $navLink.animate({ backgroundColor : '#e74c3c', color : '#fff'}, "fast");
+        },
         success: function(response){
-            alert(response);
-            $('.retrieveArticle#'+$id).remove();
+            $navLink.hide("slow", function() {
+                $navLink.remove();
+            });
         },
         error: function(something) {
-            alert("it failed to Delete the Article.");
+            alert("JQUERY - it failed to Delete the Article.");
           }
     });
 }
