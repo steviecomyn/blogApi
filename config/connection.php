@@ -175,7 +175,10 @@ function db_deleteArticle($json){
     if ($stmt->execute()) {
         // If Sucessful, Return JSON Response.
         header('Content-type: text/json');
-        echo "Article " + $id + " has been Deleted Successfully.";
+        $successMessage->message = "Deleted Successfully!";
+
+        $ajaxResponse = json_encode($successMessage);
+        echo $ajaxResponse;
 
     } else {
         var_dump($array);
