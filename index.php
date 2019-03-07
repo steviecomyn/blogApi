@@ -14,6 +14,7 @@ require('config/connection.php');
     <title>JSON API Backend</title>
 </head>
 <body>
+<div id="loader"><div id="spinner"></div></div>
 <header>
 <div class="icon">
     <img src="icon.png" alt="API">
@@ -77,6 +78,7 @@ require('config/connection.php');
 </div>
 
 <script src="js/jqueryFunctions.js"></script>
+<script src="js/jquery.animate-colors-min.js"></script>
 
 <br><hr>
 <p>Stevie Comyn &copy; 2019</p>
