@@ -46,6 +46,7 @@ switch($request_method){
 				case 'deleteArticle':
 					//Pass JSON to delete Article function for deletion.
 					db_deleteArticle($_POST);
+					break;
 				default:
 					echo("ARTICLES.PHP - Something failed with the Post");
 			}
