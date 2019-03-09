@@ -58,17 +58,36 @@ h1 {
     line-height: 1.2em;
 }
 
+#retrieveSection {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "navigation"
+        "content";
+    grid-gap: 1em;
+}
+
 .content {
     border: 1px solid #ccc;
     background: #fff;
     padding: 1em;
     margin: 0.5em 0;
-    max-width: 400px;
+    max-width: 100%;
+    height: auto;
+}
+
+#navigationDiv {
+    grid-area: navigation;
+}
+
+#contentDiv {
+    grid-area: content;
 }
 
 #navigation {
     background-color: #fff;
     border-collapse: collapse;
+    width: 100%;
 }
 
 #navigation thead {
@@ -121,4 +140,15 @@ button:active {
 .deletePost:hover {
     color: red;
     transition: 0.2s;
+}
+
+@media only screen and (min-width: 640px) {
+
+    #retrieveSection {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "navigation content";
+        grid-gap: 1em;
+    }
 }

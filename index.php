@@ -43,23 +43,28 @@ require('config/connection.php');
 <br><hr>
 
 <h2>Retrieve an Article</h2>
+<div id="retrieveSection">
+    <div id="navigationDiv">
+        <h4>Navigation Links</h4>
+        <table id="navigation">
+        <thead><tr>
+            <td>Title</td>
+            <td style="text-align: center;">Edit</td>
+            <td style="text-align: center;">Delete</td>
+        </tr></thead>
+        </table>
+    </div>
 
-<table id="navigation">
-<thead><tr>
-    <td>Title</td>
-    <td style="text-align: center;">Edit</td>
-    <td style="text-align: center;">Delete</td>
-</tr></thead>
-</table>
-
-<div id="contentDiv">
-    <h4>Content Div</h4>
-    <div class="content">
-    Content will load here.
+    <div id="contentDiv">
+        <h4>Content Area</h4>
+        <div class="content">
+        Content will load here.
+        </div>
     </div>
 </div>
 
 <div id="updateArticleFormDiv">
+<br><hr>
     <h2>Update an Article</h2>
 
     <form class="updateArticle" id="updateArticleForm" action="">
